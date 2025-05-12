@@ -209,7 +209,8 @@
     // Extract unique task names
     const taskSet = new Set();
     videoFiles.forEach(file => {
-      const match = file.match(/---(.*?)_demo/);
+      const match = file.match(/(.*?)_demo/);
+      // const match = file.match(/---(.*?)_demo/);
       if (match) taskSet.add(match[1]);
     });
 
