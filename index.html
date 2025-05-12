@@ -50,12 +50,9 @@
       font: 100%/1.5 system-ui;
       counter-reset: figure;
       background: var(--color-neutral-95);
-      /* max-width: min(75vw, 80em); */
       max-width: min(100vw, 100em);
       margin: 0 auto;
     }
-
-    /* Headings */
 
     h1, h2, h3, h4, h5, h6 {
       line-height: 1.1;
@@ -72,18 +69,6 @@
       margin-block: 1em .5rem;
       font-size: clamp(2.5em, 150% + 2vh + 2vw, 10vmin);
       font-weight: 800;
-
-      small {
-        display: block;
-        width: fit-content;
-        padding: .2em .5em;
-        margin-inline: auto;
-        color: white;
-        background: var(--color-neutral-40);
-        font-size: 40%;
-        text-transform: uppercase;
-        white-space: nowrap;
-      }
     }
 
     h2 {
@@ -95,23 +80,17 @@
       font-size: 130%;
     }
 
-    /* Lists */
-
     ul, ol {
       padding-inline-start: 2em;
     }
 
-    li {
-      &::marker {
-        color: var(--color-neutral-40);
-      }
-
-      + li {
-        margin-top: .2em;
-      };
+    li::marker {
+      color: var(--color-neutral-40);
     }
 
-    /* Sectioning elements */
+    li + li {
+      margin-top: .2em;
+    }
 
     header {
       padding-block: 1em;
@@ -125,43 +104,11 @@
       padding: 0.1rem 2rem;
     }
 
-    /* Figures */
-
-    figure {
-      margin: 1em 0;
-      padding: .5rem;
-      margin-inline: -.5em;
-      border: 1px solid var(--color-neutral-80);
-      box-shadow: 0 .1em .2em var(--color-neutral-95);
-      text-align: center;
-      background: white;
-
-      > figcaption {
-        font: 500 75% var(--font-sans);
-        background: var(--color-neutral-95);
-        padding: .5rem;
-        margin: -.5rem;
-        margin-top: .5rem;
-        counter-increment: figure;
-        text-align: left;
-
-        &::before {
-          content: "Figure " counter(figure) ": ";
-          font-weight: bold;
-          color: var(--color-neutral-40);
-        }
-
-        a:not(:hover, :focus, :active) {
-          color: inherit;
-          text-decoration: underline;
-          text-decoration-color: color-mix(in lab, currentColor, transparent 70%);
-        }
-      }
-    }
     video {
       margin-top: 1em;
-      max-width: min(90vw, 100em);
+      max-width: 100%;
     }
+
     figcaption {
       margin-bottom: 2em;
     }
@@ -178,31 +125,11 @@
         <option value="PnPCabToCounter">PnPCabToCounter</option>
       </select>
 
-      <div id="video-container" ></div>
+      <div id="video-container"></div>
     </section>
   </main>
 
   <script>
-    // const videoFiles = [
-    //   "GVL_vs_---CoffeePressButton_demo_1_20250110-111919---expert---gemini-1.5-pro---GVL_v1---20250110-124238---THREAD_v2b---20250110-122457-v2.mp4",
-    //   "GVL_vs_---CoffeePressButton_demo_1_20250110-151433---nonexpert---gemini-1.5-pro---GVL_v1---20250111-100159---THREAD_v2b---20250111-095455-v2.mp4",
-    //   "GVL_vs_---CoffeeServeMug_demo_17_20250119-133810---expert---gemini-1.5-pro---GVL_v1---20250120-134431---THREAD_v2b---20250120-125956-v2.mp4",
-    //   "GVL_vs_---CoffeeServeMug_demo_17---nonexpert---gemini-1.5-pro---GVL_v1---20250120-182932---THREAD_v2b---20250120-181617-v2.mp4",
-    //   "GVL_vs_---PnPCabToCounter_demo_37_20250119-131124---expert---gemini-1.5-pro---GVL_v1---20250120-134754---THREAD_v2b---20250120-125648-v2.mp4",
-    //   "GVL_vs_---PnPCabToCounter_demo_37---nonexpert---gemini-1.5-pro---GVL_v1---20250120-183513---THREAD_v2b---20250120-181913-v2.mp4",
-    //   "GVL_vs_---PnPCounterToCab_demo_9_20250112-113405---expert---gemini-1.5-pro---GVL_v1---20250112-115030---THREAD_v2b---20250113-145604-v2.mp4",
-    //   "GVL_vs_---PnPCounterToCab_demo_9---nonexpert---gemini-1.5-pro---GVL_v1---20250120-190404---THREAD_v2b---20250120-190645-v2.mp4",
-    //   "GVL_vs_---PnPCounterToSink_demo_14_nonexpert_lev2.1-one-NA---nonexpert---gemini-1.5-pro---GVL_v1---20250209-181825---THREAD_v2b---20250209-175641-v2.mp4",
-    //   "GVL_vs_---PnPStoveToCounter_demo_4_20250119-142602---expert---gemini-1.5-pro---GVL_v1---20250120-135157---THREAD_v2b---20250120-130859-v2.mp4",
-    //   "GVL_vs_---PnPStoveToCounter_demo_4---nonexpert---gemini-1.5-pro---GVL_v1---20250120-183811---THREAD_v2b---20250120-182143-v2.mp4",
-    //   "GVL_vs_---TurnOnMicrowave_demo_1_20250109-141809---expert---gemini-1.5-pro---GVL_v1---20250109-150354---THREAD_v2b---20250109-150115-v2.mp4",
-    //   "GVL_vs_---TurnOnStove_demo_0_20250109-100518---expert---gemini-1.5-pro---GVL_v1---20250110-131920---THREAD_v2b---20250110-130455-v2.mp4",
-    //   "GVL_vs_---TurnOnStove_demo_9_20250119-142412---expert---gemini-1.5-pro---GVL_v1---20250120-191317---THREAD_v2b---20250120-174907-v2.mp4",
-    //   "GVL_vs_---TurnOnStove_demo_9---nonexpert---gemini-1.5-pro---GVL_v1---20250120-184438---THREAD_v2b---20250120-182510-v2.mp4",
-    //   "GVL_vs_---TurnSinkSpout_demo_1_20250110-101220---expert---gemini-1.5-pro---GVL_v1---20250110-133953---THREAD_v2b---20250110-133641-v2.mp4",
-    //   "GVL_vs_---TurnSinkSpout_demo_41_20250119-140653---expert---gemini-1.5-pro---GVL_v1---20250120-191044---THREAD_v2b---20250120-191535-v2.mp4",
-    //   "GVL_vs_---TurnSinkSpout_demo_41---nonexpert---gemini-1.5-pro---GVL_v1---20250120-184142---THREAD_v2b---20250120-193948-v2.mp4"
-    // ];
     const videoFiles = ['TurnOffStove_demo_30_nonexpert_lev7_ex.mp4', 'OpenDrawer_demo_45_nonexpert_lev7_ex.mp4', 'PnPCounterToMicrowave_demo_22_nonexpert_lev4_ex.mp4', 'PnPStoveToCounter_demo_26_nonexpert_lev6_ex.mp4', 'PnPCounterToSink_demo_22_nonexpert_lev4_ex.mp4', 'CoffeeSetupMug_demo_17_nonexpert_lev3_ex.mp4', 'CloseDrawer_demo_11_nonexpert_lev1_ex.mp4', 'PnPCabToCounter_demo_26_nonexpert_lev6_ex.mp4', 'PnPCounterToSink_demo_31_nonexpert_lev7_ex.mp4', 'PnPSinkToCounter_demo_30_nonexpert_lev7_ex.mp4', 'CloseSingleDoor_demo_31_nonexpert_lev2_ex.mp4', 'CloseDrawer_demo_31_nonexpert_lev7_ex.mp4', 'CloseSingleDoor_demo_38_nonexpert_lev3_ex.mp4', 'PrepareCoffee_demo_5_nonexpert_lev3_ex.mp4', 'PnPCounterToCab_demo_25_nonexpert_lev5_ex.mp4', 'CoffeeServeMug_demo_27_nonexpert_lev5_ex.mp4', 'PnPCounterToCab_demo_13_nonexpert_lev1_ex.mp4', 'TurnOffSinkFaucet_demo_48_nonexpert_lev3_ex.mp4', 'TurnOnSinkFaucet_demo_29_nonexpert_lev7_ex.mp4', 'PnPCounterToStove_demo_14_nonexpert_lev2_ex.mp4', 'PnPCounterToCab_demo_26_nonexpert_lev6_ex.mp4', 'TurnSinkSpout_demo_43_nonexpert_lev3_ex.mp4', 'PnPCounterToMicrowave_demo_14_nonexpert_lev2_ex.mp4', 'PnPCounterToSink_demo_14_nonexpert_lev2_ex.mp4', 'MicrowaveThawing_demo_34_nonexpert_lev3_ex.mp4', 'PnPCabToCounter_demo_13_nonexpert_lev1_ex.mp4', 'PnPStoveToCounter_demo_25_nonexpert_lev5_ex.mp4', 'CoffeeSetupMug_demo_22_nonexpert_lev4_ex.mp4', 'OpenDrawer_demo_11_nonexpert_lev1_ex.mp4', 'PnPCounterToMicrowave_demo_17_nonexpert_lev3_ex.mp4', 'PnPCounterToSink_demo_17_nonexpert_lev3_ex.mp4', 'PnPStoveToCounter_demo_13_nonexpert_lev1_ex.mp4', 'PreSoakPan_demo_40_nonexpert_lev2_ex.mp4', 'PnPCabToCounter_demo_25_nonexpert_lev5_ex.mp4', 'TurnOnStove_demo_40_nonexpert_lev1_ex.mp4', 'OpenSingleDoor_demo_48_nonexpert_lev7_ex.mp4', 'TurnOnSinkFaucet_demo_44_nonexpert_lev6_ex.mp4', 'PnPMicrowaveToCounter_demo_20_nonexpert_lev4_ex.mp4', 'TurnOnStove_demo_43_nonexpert_lev6_ex.mp4', 'CoffeeServeMug_demo_50_nonexpert_lev2_ex.mp4', 'TurnOnSinkFaucet_demo_47_nonexpert_lev1_ex.mp4', 'RestockPantry_demo_7_nonexpert_lev3_ex.mp4', 'TurnOffSinkFaucet_demo_13_nonexpert_lev2_ex.mp4', 'PnPCounterToMicrowave_demo_30_nonexpert_lev7_ex.mp4', 'TurnOffSinkFaucet_demo_44_nonexpert_lev7_ex.mp4', 'PnPCounterToStove_demo_23_nonexpert_lev4_ex.mp4', 'CoffeePressButton_demo_11_nonexpert_lev1_ex.mp4', 'PnPMicrowaveToCounter_demo_13_nonexpert_lev1_ex.mp4', 'PnPCounterToStove_demo_26_nonexpert_lev5_ex.mp4', 'PnPMicrowaveToCounter_demo_25_nonexpert_lev5_ex.mp4', 'PnPCounterToSink_demo_26_nonexpert_lev5_ex.mp4', 'PnPSinkToCounter_demo_22_nonexpert_lev4_ex.mp4', 'ArrangeVegetables_demo_50_nonexpert_lev2_ex.mp4', 'PreSoakPan_demo_3_nonexpert_lev1_ex.mp4', 'PnPSinkToCounter_demo_17_nonexpert_lev3_ex.mp4', 'TurnSinkSpout_demo_14_nonexpert_lev2_ex.mp4', 'CoffeeServeMug_demo_44_nonexpert_lev7_ex.mp4', 'PnPMicrowaveToCounter_demo_26_nonexpert_lev6_ex.mp4', 'PnPSinkToCounter_demo_14_nonexpert_lev2_ex.mp4', 'CloseDrawer_demo_43_nonexpert_lev3_ex.mp4', 'CoffeeSetupMug_demo_50_nonexpert_lev2_ex.mp4', 'TurnOnSinkFaucet_demo_42_nonexpert_lev2_ex.mp4', 'TurnOnMicrowave_demo_11_nonexpert_lev1_ex.mp4', 'RestockPantry_demo_42_nonexpert_lev1_ex.mp4', 'TurnOffMicrowave_demo_17_nonexpert_lev2_ex.mp4', 'OpenDrawer_demo_46_nonexpert_lev3_ex.mp4', 'PnPCounterToCab_demo_22_nonexpert_lev4_ex.mp4', 'PnPMicrowaveToCounter_demo_30_nonexpert_lev7_ex.mp4', 'PreSoakPan_demo_10_nonexpert_lev4_ex.mp4', 'TurnOnStove_demo_17_nonexpert_lev3_ex.mp4', 'PnPCabToCounter_demo_14_nonexpert_lev2_ex.mp4', 'MicrowaveThawing_demo_9_nonexpert_lev2_ex.mp4', 'TurnOnMicrowave_demo_20_nonexpert_lev2_ex.mp4', 'TurnSinkSpout_demo_41_nonexpert_lev1_ex.mp4', 'OpenDrawer_demo_16_nonexpert_lev2_ex.mp4', 'OpenSingleDoor_demo_41_nonexpert_lev1_ex.mp4', 'OpenDrawer_demo_26_nonexpert_lev6_ex.mp4', 'TurnOffStove_demo_41_nonexpert_lev1_ex.mp4', 'PnPStoveToCounter_demo_14_nonexpert_lev2_ex.mp4', 'RestockPantry_demo_20_nonexpert_lev2_ex.mp4', 'MicrowaveThawing_demo_32_nonexpert_lev4_ex.mp4', 'PnPCabToCounter_demo_17_nonexpert_lev3_ex.mp4', 'CoffeeSetupMug_demo_26_nonexpert_lev6_ex.mp4', 'PnPCounterToStove_demo_13_nonexpert_lev1_ex.mp4', 'PnPCounterToMicrowave_demo_25_nonexpert_lev5_ex.mp4', 'CoffeeSetupMug_demo_29_nonexpert_lev7_ex.mp4', 'PnPCounterToMicrowave_demo_13_nonexpert_lev1_ex.mp4', 'PnPStoveToCounter_demo_17_nonexpert_lev3_ex.mp4', 'PnPCounterToSink_demo_13_nonexpert_lev1_ex.mp4', 'CloseSingleDoor_demo_11_nonexpert_lev1_ex.mp4', 'CoffeeServeMug_demo_13_nonexpert_lev1_ex.mp4', 'TurnSinkSpout_demo_50_nonexpert_lev7_ex.mp4', 'CloseSingleDoor_demo_34_nonexpert_lev6_ex.mp4', 'PrepareCoffee_demo_49_nonexpert_lev2_ex.mp4', 'TurnOffSinkFaucet_demo_40_nonexpert_lev1_ex.mp4', 'CoffeePressButton_demo_20_nonexpert_lev2_ex.mp4', 'PnPCounterToMicrowave_demo_26_nonexpert_lev6_ex.mp4', 'TurnOffStove_demo_18_nonexpert_lev3_ex.mp4', 'OpenSingleDoor_demo_18_nonexpert_lev3_ex.mp4', 'PnPStoveToCounter_demo_22_nonexpert_lev4_ex.mp4', 'CoffeeServeMug_demo_48_nonexpert_lev6_ex.mp4', 'TurnOffStove_demo_27_nonexpert_lev6_ex.mp4', 'CoffeeSetupMug_demo_13_nonexpert_lev1_ex.mp4', 'CoffeeServeMug_demo_19_nonexpert_lev3_ex.mp4', 'PnPCounterToCab_demo_14_nonexpert_lev2_ex.mp4', 'PnPCabToCounter_demo_22_nonexpert_lev4_ex.mp4', 'CloseSingleDoor_demo_27_nonexpert_lev7_ex.mp4', 'CloseDrawer_demo_26_nonexpert_lev6_ex.mp4', 'PnPCounterToCab_demo_17_nonexpert_lev3_ex.mp4', 'MicrowaveThawing_demo_26_nonexpert_lev1_ex.mp4', 'MicrowaveThawing_demo_49_nonexpert_lev5_ex.mp4', 'TurnOffStove_demo_42_nonexpert_lev2_ex.mp4', 'PreSoakPan_demo_12_nonexpert_lev3_ex.mp4', 'TurnOffMicrowave_demo_12_nonexpert_lev1_ex.mp4', 'PnPSinkToCounter_demo_13_nonexpert_lev1_ex.mp4', 'TurnOffMicrowave_demo_28_nonexpert_lev3_ex.mp4', 'ArrangeVegetables_demo_3_nonexpert_lev1_ex.mp4', 'PnPCounterToCab_demo_30_nonexpert_lev7_ex.mp4', 'CoffeeServeMug_demo_49_nonexpert_lev4_ex.mp4', 'TurnOffSinkFaucet_demo_49_nonexpert_lev6_ex.mp4', 'PnPCounterToStove_demo_32_nonexpert_lev7_ex.mp4', 'PnPSinkToCounter_demo_25_nonexpert_lev5_ex.mp4', 'TurnOnMicrowave_demo_28_nonexpert_lev3_ex.mp4', 'TurnOnStove_demo_44_nonexpert_lev7_ex.mp4', 'TurnOnStove_demo_13_nonexpert_lev2_ex.mp4', 'CoffeeSetupMug_demo_24_nonexpert_lev5_ex.mp4', 'TurnOnSinkFaucet_demo_43_nonexpert_lev3_ex.mp4', 'PnPCabToCounter_demo_30_nonexpert_lev7_ex.mp4', 'PnPCounterToStove_demo_18_nonexpert_lev3_ex.mp4', 'PnPCounterToSink_demo_27_nonexpert_lev6_ex.mp4', 'PnPMicrowaveToCounter_demo_14_nonexpert_lev2_ex.mp4', 'CloseDrawer_demo_42_nonexpert_lev2_ex.mp4', 'PnPStoveToCounter_demo_30_nonexpert_lev7_ex.mp4', 'ArrangeVegetables_demo_23_nonexpert_lev3_ex.mp4', 'OpenSingleDoor_demo_49_nonexpert_lev2_ex.mp4', 'PnPCounterToStove_demo_27_nonexpert_lev6_ex.mp4', 'OpenSingleDoor_demo_26_nonexpert_lev6_ex.mp4', 'PnPMicrowaveToCounter_demo_17_nonexpert_lev3_ex.mp4', 'TurnSinkSpout_demo_44_nonexpert_lev6_ex.mp4', 'PrepareCoffee_demo_6_nonexpert_lev1_ex.mp4', 'PnPSinkToCounter_demo_26_nonexpert_lev6_ex.mp4', 'CoffeePressButton_demo_24_nonexpert_lev3_ex.mp4'];
 
 
@@ -210,7 +137,6 @@
     const taskSet = new Set();
     videoFiles.forEach(file => {
       const match = file.match(/(.*?)_demo/);
-      // const match = file.match(/---(.*?)_demo/);
       if (match) taskSet.add(match[1]);
     });
 
@@ -227,28 +153,27 @@
       const container = document.getElementById("video-container");
       container.innerHTML = "";
 
-      const filtered = selectedTask === "all"
-        ? videoFiles
-        : videoFiles.filter(file => file.includes(`${selectedTask}_demo`));
+      const filtered = videoFiles.filter(file => file.includes(`${selectedTask}_demo`));
 
       filtered.forEach(file => {
-        const video = document.createElement("video");
-        video.controls = true;
-        // video.width = min(100vw, 100em);
-        const source = document.createElement("source");
-        source.src = file;
-        source.type = "video/mp4";
-        video.appendChild(source);
+        const wrapper = document.createElement("div");
+
+        const videoHTML = `
+          <video controls width="1200">
+            <source src="${file}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        `;
+        wrapper.innerHTML = videoHTML;
 
         const caption = document.createElement("figcaption");
         caption.textContent = file;
 
-        container.appendChild(video);
+        container.appendChild(wrapper);
         container.appendChild(caption);
       });
     }
 
-    // Show all videos on page load
     window.onload = filterVideos;
   </script>
 </body>
