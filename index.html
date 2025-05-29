@@ -120,7 +120,8 @@
 
         <!-- <option value="All">All</option> -->
         <!-- <option value="PnPCounterToCab">PnPCounterToCab</option> -->
-        <option value="PnPCounterToMicrowave">PnPCounterToMicrowave</option>
+        <!-- <option value="PnPCounterToMicrowave">PnPCounterToMicrowave</option> -->
+        <option value="PnPCounterToSink">PnPCounterToSink</option>
       </select>
 
       <label for="lev-select" style="font-size: 1em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select trajectory level:</label>
@@ -331,8 +332,10 @@ taskSelect.innerHTML = '';
 const allOption = document.createElement("option");
 // allOption.value = "All";
 // allOption.textContent = "All";
-allOption.value = "PnPCounterToMicrowave";
-allOption.textContent = "PnPCounterToMicrowave";
+// allOption.value = "PnPCounterToMicrowave";
+// allOption.textContent = "PnPCounterToMicrowave";
+allOption.value = "PnPCounterToSink";
+allOption.textContent = "PnPCounterToSink";
 taskSelect.appendChild(allOption);
 
 // Then add the tasks in the specified order, avoiding duplicates
