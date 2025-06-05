@@ -449,51 +449,13 @@ window.onload = () => {
   updateLevelOptions();
   filterVideos();
 };
-// function checkKeyword() {
-//   const input = document.getElementById("keyword-input").value.trim().toLowerCase();
-//   const allowedKeywords = ["Given", "given"]; // customize your list
-//   if (allowedKeywords.includes(input)) {
-//     document.getElementById("access-gate").style.display = "none";
-//     document.querySelector("main").style.display = "block";
-//   } else {
-//     document.getElementById("error-msg").textContent = "Incorrect keyword. Please try again.";
-//   }
-// }
 
-// function checkKeyword() {
-//   const input = document.getElementById("keyword-input").value.trim().toLowerCase();
-//   const allowedKeywords = ["Given","given"]; // your valid keywords
-
-//   if (allowedKeywords.includes(input)) {
-//     localStorage.setItem("hasAccess", "true"); // save access
-//     showMainContent();
-//   } else {
-//     document.getElementById("error-msg").textContent = "Incorrect keyword. Please try again.";
-//   }
-// }
-// function showMainContent() {
-//   document.getElementById("access-gate").style.display = "none";
-//   document.querySelector("main").style.display = "block";
-// }
-// window.onload = () => {
-//   updateLevelOptions();
-//   filterVideos();
-// };
-// window.onload = () => {
-//   if (localStorage.getItem("hasAccess") === "true") {
-//     showMainContent();
-//     updateLevelOptions();
-//     filterVideos();
-//   }
-// };
 
 function checkKeyword() {
   const input = document.getElementById("keyword-input").value.trim();
 
-  // Encode the input to base64 for comparison
   const encodedInput = btoa(input);
 
-  // Base64-encoded allowed keywords (e.g., "Given" => "R2l2ZW4=")
   const allowedEncoded = ["R2l2ZW4=", "Z2l2ZW4="]; 
 
   if (allowedEncoded.includes(encodedInput)) {
